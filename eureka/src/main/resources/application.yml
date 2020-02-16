@@ -1,0 +1,27 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    preferIpAddress: false
+    hostName: ${EUREKA_HOSTNAME:localhost}
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostName}:${server.port}/eureka/
+
+endpoints:
+  enabled: false
+  info.enabled: true
+  health.enabled: true
+
+info:
+  version: ${VERSION:latest}
+  name: eureka
+
+logging:
+  level:
+    com:
+      netflix:
+        eureka: OFF

@@ -1,0 +1,56 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.4.RELEASE")
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+        mavenCentral()
+    }
+
+    ext {
+        springCloudVersion = "Hoxton.SR1"
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    bootJar {
+        enabled false
+    }
+}
+
+subprojects {
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-actuator',
+                'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client',
+                'org.modelmapper:modelmapper:2.3.0'
+
+        compileOnly 'org.projectlombok:lombok:1.18.12'
+        annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+}
+
+wrapper {
+    version '6.0.1'
+}

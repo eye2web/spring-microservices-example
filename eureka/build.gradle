@@ -1,0 +1,8 @@
+bootJar {
+	enabled true
+	mainClassName = 'eye2web.eureka.EurekaApplication'
+}
+
+dependencies {
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+}

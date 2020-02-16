@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_HOSTNAME:localhost}:8761/eureka/
+
+endpoints:
+  enabled: false
+  info.enabled: true
+  health.enabled: true
+
+info:
+  version: ${VERSION:latest}
+  name: articles
+
+logging.level.org.springframework: ERROR
+
+spring:
+  jpa:
+    hibernate.ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  datasource:
+    initialization-mode: always
+    platform: postgres
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB:demo}?currentSchema=${spring.flyway.schemas}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:secret123}
+  flyway:
+      enabled: true
+      locations: classpath:db/migration
+      user: ${spring.datasource.username}
+      password: ${spring.datasource.password}
+      schemas: articles
+
+---
+spring:
+  profiles: develop
+
+server:
+  port: 8085
+
+eureka:
+  client:
+    enabled: false

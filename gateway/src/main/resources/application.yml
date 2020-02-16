@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      enabled: true
+      routes:
+        - id: Articles-info
+          uri: lb://articles
+          predicates:
+            - Path=/articles/actuator/*
+          filters:
+            - StripPrefix=1
+        - id: Articles
+          uri: lb://articles
+          predicates:
+            - Path=/api/articles/**
+          filters:
+            - StripPrefix=1
+        - id: Eureka-info
+          uri: http://${EUREKA_HOSTNAME:localhost}:8761
+          predicates:
+            - Path=/eureka/actuator/*
+          filters:
+            - StripPrefix=1
+        - id: Gateway-info
+          uri: lb://gateway
+          predicates:
+            - Path=/gateway/actuator/*
+          filters:
+            - StripPrefix=1
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_HOSTNAME:localhost}:8761/eureka/
+
+endpoints:
+  enabled: false
+  info.enabled: true
+  health.enabled: true
+
+info:
+  version: ${VERSION:latest}
+  name: gateway
+
+---
+spring:
+  profiles: develop
