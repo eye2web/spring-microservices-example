@@ -1,8 +1,6 @@
 package eye2web.articles.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,7 +11,9 @@ import java.util.UUID;
 @Entity
 @Data
 @EqualsAndHashCode
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Price {
     @Id
     @GeneratedValue(generator = "UUID")
