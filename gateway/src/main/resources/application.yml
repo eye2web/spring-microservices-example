@@ -19,7 +19,7 @@ spring:
         - id: Articles-info
           uri: lb://articles
           predicates:
-            - Path=/articles/actuator/*
+            - Path=/articles/actuator/**
           filters:
             - StripPrefix=1
         - id: Articles
@@ -31,13 +31,13 @@ spring:
         - id: Eureka-info
           uri: http://${EUREKA_HOSTNAME:localhost}:8761
           predicates:
-            - Path=/eureka/actuator/*
+            - Path=/eureka/actuator/**
           filters:
             - StripPrefix=1
         - id: Gateway-info
           uri: lb://gateway
           predicates:
-            - Path=/gateway/actuator/*
+            - Path=/gateway/actuator/**
           filters:
             - StripPrefix=1
 eureka:
