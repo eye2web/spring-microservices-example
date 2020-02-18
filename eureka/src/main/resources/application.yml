@@ -11,10 +11,11 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostName}:${server.port}/eureka/
 
-endpoints:
-  enabled: false
-  info.enabled: true
-  health.enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics
 
 info:
   version: ${VERSION:latest}

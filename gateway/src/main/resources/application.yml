@@ -1,6 +1,16 @@
 server:
   port: 8080
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics
+
+info:
+  version: ${VERSION:latest}
+  name: gateway
+
 spring:
   cloud:
     gateway:
@@ -34,15 +44,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://${EUREKA_HOSTNAME:localhost}:8761/eureka/
-
-endpoints:
-  enabled: false
-  info.enabled: true
-  health.enabled: true
-
-info:
-  version: ${VERSION:latest}
-  name: gateway
 
 ---
 spring:
