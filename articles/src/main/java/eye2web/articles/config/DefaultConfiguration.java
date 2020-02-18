@@ -11,5 +11,5 @@ public class DefaultConfiguration {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
-
+    
 }

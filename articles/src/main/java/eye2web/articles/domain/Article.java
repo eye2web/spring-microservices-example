@@ -26,6 +26,6 @@ public class Article {
     private String code;
     private LocalDateTime created;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "article", cascade = CascadeType.ALL)
     private List<Price> prices;
 }

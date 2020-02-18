@@ -44,7 +44,15 @@ public class ArticleService {
 
         switch (searchOption) {
             case STARTS_WITH:
-                return articleRepository.searchByCodeStartsWith(code);
+                return articleRepository.findByCodeStartsWith(code);
+
+            case ENDS_WITH:
+                return articleRepository.findByCodeEndsWith(code);
+
+            case CONTAINS:
+                return articleRepository.findByCodeContaining(code);
+
+            case EQUALS:
             default:
                 return articleRepository.findAllByCode(code);
         }

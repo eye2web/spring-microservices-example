@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 @RequiredArgsConstructor
 public enum SearchOption {
-    STARTS_WITH("startswith");
+    STARTS_WITH("startswith"), ENDS_WITH("endswith"), EQUALS("equals"), CONTAINS("contains");
 
     @Getter
     private final String searchOption;

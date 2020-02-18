@@ -18,6 +18,9 @@ info:
 logging.level.org.springframework: ERROR
 
 spring:
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
   jpa:
     hibernate.ddl-auto: validate
     properties:
@@ -32,15 +35,17 @@ spring:
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:secret123}
   flyway:
-      enabled: true
-      locations: classpath:db/migration
-      user: ${spring.datasource.username}
-      password: ${spring.datasource.password}
-      schemas: articles
+    enabled: true
+    locations: classpath:db/migration
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    schemas: articles
 
 ---
 spring:
   profiles: develop
+
+logging.level.org.springframework: WARN
 
 server:
   port: 8085

@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 set -e
-echo "container args are: $@"
-java -jar /app/application.jar $@
+
+jargs=( $JAVA_ARGS )
+sargs=( $SPRING_ARGS )
+
+echo "Starting java ${jargs[@]} -jar /app/application.jar ${sargs[@]} ${@}"
+java "${jargs[@]}" -jar /app/application.jar "${sargs[@]}" "${@}"
